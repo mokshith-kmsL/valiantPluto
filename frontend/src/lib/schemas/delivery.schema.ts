@@ -2,6 +2,7 @@ import { z } from "zod";
 
 export const DeliverySchema = z.object({
   customerId: z.string().min(1, "Customer is required"),
+  locationId: z.string().min(1, "Source location is required"),
   productId: z.string().min(1, "Product is required"),
   sku: z
     .string()

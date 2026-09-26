@@ -9,9 +9,11 @@ import { DeliverySchema, type DeliveryFormValues } from "@/lib/schemas/delivery.
 import { useFetch } from "@/hooks/useFetch";
 import {
   fetchProducts,
+  fetchLocations,
   createDelivery,
   validateOperation,
   type ApiProduct,
+  type ApiLocation,
 } from "@/lib/api";
 import { customers } from "@/data/customers"; // no /api/customers endpoint yet
 import { nextDeliveryStep } from "@/lib/utils";
@@ -45,6 +47,8 @@ export default function DeliveryForm({ onSubmit }: DeliveryFormProps) {
 
   const { data: apiProducts, loading: productsLoading, error: productsError } =
     useFetch<ApiProduct[]>(fetchProducts);
+  const { data: apiLocations, loading: locationsLoading } =
+    useFetch<ApiLocation[]>(fetchLocations);
 
   const {
     register,
@@ -71,11 +75,16 @@ export default function DeliveryForm({ onSubmit }: DeliveryFormProps) {
     setSubmitting(true);
     try {
       const created = await createDelivery({
-        customerId: data.customerId,
-        productId: data.productId,
-        sku: data.sku,
-        quantity: data.quantity,
-        deliveryRef: data.deliveryRef,
+        source_location_id: data.locationId,
+        customer_name:      data.customerId,
+        created_by:         "user",
+      });
+
+      // Add product line
+      await fetch(`http://localhost:3000/api/deliveries/${created.id}/lines`, {
+        method:  "POST",
+        headers: { "Content-Type": "application/json" },
+        body:    JSON.stringify({ product_id: data.productId, qty: data.quantity }),
       });
       setDraftId(created.id);
       setStep("pack");
@@ -189,6 +198,21 @@ export default function DeliveryForm({ onSubmit }: DeliveryFormProps) {
                   </SelectContent>
                 </Select>
                 {errors.customerId && <p className="text-sm text-red-500">{errors.customerId.message}</p>}
+              </div>
+
+              <div className="flex flex-col gap-1.5">
+                <Label htmlFor="locationId">Source Warehouse <span className="text-red-500">*</span></Label>
+                <Select onValueChange={(val) => setValue("locationId", val, { shouldValidate: true })} disabled={locationsLoading}>
+                  <SelectTrigger id="locationId" className={errors.locationId ? "border-red-500" : ""}>
+                    <SelectValue placeholder={locationsLoading ? "Loading…" : "Select a warehouse…"} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {(apiLocations ?? []).map((l) => (
+                      <SelectItem key={l.id} value={l.id}>{l.name}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                {errors.locationId && <p className="text-sm text-red-500">{errors.locationId.message}</p>}
               </div>
 
               <div className="flex flex-col gap-1.5">
