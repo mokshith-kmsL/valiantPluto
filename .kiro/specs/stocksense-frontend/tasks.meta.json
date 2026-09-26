@@ -1,0 +1,209 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1.1 Scaffold Next.js 14 App Router project with TypeScript strict mode": [
+      {
+        "executionId": "a47b5de6-c3e6-4817-97a5-5d86704542c5",
+        "chatSessionId": "sess_86808db0-f691-464c-937e-5119af75728b",
+        "timestamp": 1790408772348
+      },
+      {
+        "executionId": "a47b5de6-c3e6-4817-97a5-5d86704542c5",
+        "chatSessionId": "sess_86808db0-f691-464c-937e-5119af75728b",
+        "timestamp": 1790408790105
+      },
+      {
+        "executionId": "a47b5de6-c3e6-4817-97a5-5d86704542c5",
+        "chatSessionId": "sess_86808db0-f691-464c-937e-5119af75728b",
+        "timestamp": 1790409386303
+      }
+    ],
+    "1.2 Install and configure UI and form dependencies": [
+      {
+        "executionId": "a47b5de6-c3e6-4817-97a5-5d86704542c5",
+        "chatSessionId": "sess_86808db0-f691-464c-937e-5119af75728b",
+        "timestamp": 1790408774396
+      },
+      {
+        "executionId": "a47b5de6-c3e6-4817-97a5-5d86704542c5",
+        "chatSessionId": "sess_86808db0-f691-464c-937e-5119af75728b",
+        "timestamp": 1790409393008
+      },
+      {
+        "executionId": "a47b5de6-c3e6-4817-97a5-5d86704542c5",
+        "chatSessionId": "sess_86808db0-f691-464c-937e-5119af75728b",
+        "timestamp": 1790410524370
+      }
+    ],
+    "1.3 Install and configure Vitest and fast-check": [
+      {
+        "executionId": "a47b5de6-c3e6-4817-97a5-5d86704542c5",
+        "chatSessionId": "sess_86808db0-f691-464c-937e-5119af75728b",
+        "timestamp": 1790408774593
+      },
+      {
+        "executionId": "a47b5de6-c3e6-4817-97a5-5d86704542c5",
+        "chatSessionId": "sess_86808db0-f691-464c-937e-5119af75728b",
+        "timestamp": 1790409393400
+      },
+      {
+        "executionId": "a47b5de6-c3e6-4817-97a5-5d86704542c5",
+        "chatSessionId": "sess_86808db0-f691-464c-937e-5119af75728b",
+        "timestamp": 1790410524847
+      }
+    ],
+    "2.1 Define shared TypeScript types in `src/lib/types.ts`": [
+      {
+        "executionId": "a47b5de6-c3e6-4817-97a5-5d86704542c5",
+        "chatSessionId": "sess_86808db0-f691-464c-937e-5119af75728b",
+        "timestamp": 1790408774831
+      },
+      {
+        "executionId": "a47b5de6-c3e6-4817-97a5-5d86704542c5",
+        "chatSessionId": "sess_86808db0-f691-464c-937e-5119af75728b",
+        "timestamp": 1790410531733
+      },
+      {
+        "executionId": "a47b5de6-c3e6-4817-97a5-5d86704542c5",
+        "chatSessionId": "sess_86808db0-f691-464c-937e-5119af75728b",
+        "timestamp": 1790410583528
+      }
+    ],
+    "2.2 Create mock data files in `src/data/`": [
+      {
+        "executionId": "a47b5de6-c3e6-4817-97a5-5d86704542c5",
+        "chatSessionId": "sess_86808db0-f691-464c-937e-5119af75728b",
+        "timestamp": 1790408774997
+      },
+      {
+        "executionId": "a47b5de6-c3e6-4817-97a5-5d86704542c5",
+        "chatSessionId": "sess_86808db0-f691-464c-937e-5119af75728b",
+        "timestamp": 1790410590523
+      }
+    ],
+    "3.1 Implement pure utility functions in `src/lib/utils.ts`": [
+      {
+        "executionId": "a47b5de6-c3e6-4817-97a5-5d86704542c5",
+        "chatSessionId": "sess_86808db0-f691-464c-937e-5119af75728b",
+        "timestamp": 1790408775368
+      },
+      {
+        "executionId": "a47b5de6-c3e6-4817-97a5-5d86704542c5",
+        "chatSessionId": "sess_86808db0-f691-464c-937e-5119af75728b",
+        "timestamp": 1790410590842
+      }
+    ],
+    "3.2 Create Zod schemas in `src/lib/schemas/`": [
+      {
+        "executionId": "a47b5de6-c3e6-4817-97a5-5d86704542c5",
+        "chatSessionId": "sess_86808db0-f691-464c-937e-5119af75728b",
+        "timestamp": 1790408775495
+      }
+    ],
+    "4. Checkpoint — Ensure all schema and utility tests pass": [
+      {
+        "executionId": "a47b5de6-c3e6-4817-97a5-5d86704542c5",
+        "chatSessionId": "sess_86808db0-f691-464c-937e-5119af75728b",
+        "timestamp": 1790408775618
+      }
+    ],
+    "5.1 Implement `src/components/layout/Sidebar.tsx`": [
+      {
+        "executionId": "a47b5de6-c3e6-4817-97a5-5d86704542c5",
+        "chatSessionId": "sess_86808db0-f691-464c-937e-5119af75728b",
+        "timestamp": 1790408775764
+      }
+    ],
+    "5.2 Wire Sidebar into `src/app/layout.tsx`": [
+      {
+        "executionId": "a47b5de6-c3e6-4817-97a5-5d86704542c5",
+        "chatSessionId": "sess_86808db0-f691-464c-937e-5119af75728b",
+        "timestamp": 1790408775895
+      }
+    ],
+    "6.1 Implement `src/components/dashboard/KpiCard.tsx`": [
+      {
+        "executionId": "a47b5de6-c3e6-4817-97a5-5d86704542c5",
+        "chatSessionId": "sess_86808db0-f691-464c-937e-5119af75728b",
+        "timestamp": 1790408776025
+      }
+    ],
+    "6.2 Implement `src/components/dashboard/FilterBar.tsx`": [
+      {
+        "executionId": "a47b5de6-c3e6-4817-97a5-5d86704542c5",
+        "chatSessionId": "sess_86808db0-f691-464c-937e-5119af75728b",
+        "timestamp": 1790408776152
+      }
+    ],
+    "6.3 Implement `src/components/dashboard/StockChart.tsx`": [
+      {
+        "executionId": "a47b5de6-c3e6-4817-97a5-5d86704542c5",
+        "chatSessionId": "sess_86808db0-f691-464c-937e-5119af75728b",
+        "timestamp": 1790408776272
+      }
+    ],
+    "6.4 Implement the Dashboard page at `src/app/page.tsx`": [
+      {
+        "executionId": "a47b5de6-c3e6-4817-97a5-5d86704542c5",
+        "chatSessionId": "sess_86808db0-f691-464c-937e-5119af75728b",
+        "timestamp": 1790408776375
+      }
+    ],
+    "7.1 Implement `src/components/forms/ReceiptForm.tsx`": [
+      {
+        "executionId": "a47b5de6-c3e6-4817-97a5-5d86704542c5",
+        "chatSessionId": "sess_86808db0-f691-464c-937e-5119af75728b",
+        "timestamp": 1790408776464
+      }
+    ],
+    "7.2 Implement `src/components/forms/DeliveryForm.tsx` with 3-step state machine": [
+      {
+        "executionId": "a47b5de6-c3e6-4817-97a5-5d86704542c5",
+        "chatSessionId": "sess_86808db0-f691-464c-937e-5119af75728b",
+        "timestamp": 1790408776629
+      }
+    ],
+    "7.3 Implement `src/components/forms/TransferForm.tsx`": [
+      {
+        "executionId": "a47b5de6-c3e6-4817-97a5-5d86704542c5",
+        "chatSessionId": "sess_86808db0-f691-464c-937e-5119af75728b",
+        "timestamp": 1790408776705
+      }
+    ],
+    "7.4 Implement `src/components/forms/AdjustmentForm.tsx`": [
+      {
+        "executionId": "a47b5de6-c3e6-4817-97a5-5d86704542c5",
+        "chatSessionId": "sess_86808db0-f691-464c-937e-5119af75728b",
+        "timestamp": 1790408776780
+      }
+    ],
+    "8.1 Create transaction pages wiring forms to ledger state": [
+      {
+        "executionId": "a47b5de6-c3e6-4817-97a5-5d86704542c5",
+        "chatSessionId": "sess_86808db0-f691-464c-937e-5119af75728b",
+        "timestamp": 1790408776852
+      }
+    ],
+    "8.2 Create stub pages with `<ComingSoon />` placeholder": [
+      {
+        "executionId": "a47b5de6-c3e6-4817-97a5-5d86704542c5",
+        "chatSessionId": "sess_86808db0-f691-464c-937e-5119af75728b",
+        "timestamp": 1790408776939
+      }
+    ],
+    "9. Final checkpoint — Ensure all tests pass": [
+      {
+        "executionId": "a47b5de6-c3e6-4817-97a5-5d86704542c5",
+        "chatSessionId": "sess_86808db0-f691-464c-937e-5119af75728b",
+        "timestamp": 1790408777069
+      }
+    ],
+    "1. Project setup and configuration": [
+      {
+        "executionId": "a47b5de6-c3e6-4817-97a5-5d86704542c5",
+        "chatSessionId": "sess_86808db0-f691-464c-937e-5119af75728b",
+        "timestamp": 1790410524980
+      }
+    ]
+  }
+}
