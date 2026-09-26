@@ -9,6 +9,10 @@ const {
   LOW_STOCK_EVENT,
 } = require('./ledger');
 const ledgerRouter      = require('./routes/ledger');
+const productsRouter    = require('./routes/products');
+const locationsRouter   = require('./routes/locations');
+const historyRouter     = require('./routes/history');
+const dashboardRouter   = require('./routes/dashboard');
 
 const app  = express();
 const PORT = process.env.PORT || 3000;
@@ -37,15 +41,15 @@ app.get('/healthz', async (_req, res) => {
 
 // ── Routes ────────────────────────────────────────────────────────────────────
 
-app.use('/api/ledger', ledgerRouter);
+app.use('/api/ledger',    ledgerRouter);
+app.use('/api/products',  productsRouter);
+app.use('/api/locations', locationsRouter);
+app.use('/api/history',   historyRouter);
+app.use('/api/dashboard', dashboardRouter);
 
 // ── Low-stock event bridge ────────────────────────────────────────────────────
-// The dashboard KPI module can subscribe to this emitter directly (in-process),
-// or we log it here as a fallback so it's visible during the demo.
 
 lowStockEmitter.on(LOW_STOCK_EVENT, (payload) => {
-  // Replace this with a WebSocket push, Redis pub/sub, or POST to dashboard
-  // when your teammate's module is ready to consume it.
   console.warn(
     `[LOW STOCK ALERT] SKU=${payload.sku} | location=${payload.location_id} | `
     + `stock=${payload.current_stock} | threshold=${payload.reorder_threshold}`
@@ -63,9 +67,13 @@ app.use((err, _req, res, _next) => {
 // ── Start ─────────────────────────────────────────────────────────────────────
 
 app.listen(PORT, () => {
-  console.log(`\nStockSense Ledger Engine running on http://localhost:${PORT}`);
-  console.log(`  Health: GET  http://localhost:${PORT}/healthz`);
-  console.log(`  Ledger: POST http://localhost:${PORT}/api/ledger/entries\n`);
+  console.log(`\nStockSense API running on http://localhost:${PORT}`);
+  console.log(`  Health:    GET  http://localhost:${PORT}/healthz`);
+  console.log(`  Dashboard: GET  http://localhost:${PORT}/api/dashboard/kpis`);
+  console.log(`  Products:  GET  http://localhost:${PORT}/api/products`);
+  console.log(`  Locations: GET  http://localhost:${PORT}/api/locations`);
+  console.log(`  History:   GET  http://localhost:${PORT}/api/history`);
+  console.log(`  Ledger:    POST http://localhost:${PORT}/api/ledger/entries\n`);
 });
 
-module.exports = app; // exported for testing
+module.exports = app;
