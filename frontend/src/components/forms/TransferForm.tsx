@@ -63,12 +63,12 @@ export default function TransferForm({ onSubmit }: TransferFormProps) {
     setSubmitError(null);
     try {
       const created = await createTransfer({
-        sourceLocationId: data.sourceLocationId,
-        destLocationId: data.destLocationId,
-        productId: data.productId,
-        sku: data.sku,
-        quantity: data.quantity,
-        note: data.note,
+        from_location_id: data.sourceLocationId,
+        to_location_id:   data.destLocationId,
+        product_id:       data.productId,
+        qty:              data.quantity,
+        notes:            data.note,
+        created_by:       "user",
       });
 
       await validateOperation("transfers", created.id);

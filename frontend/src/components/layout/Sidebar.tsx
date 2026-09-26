@@ -1,21 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import {
-  LayoutDashboard,
-  Package,
-  PackageCheck,
-  Truck,
-  ArrowLeftRight,
-  ClipboardList,
-  History,
-  Settings,
-  User,
-  Menu,
-  X,
-  Boxes,
+  LayoutDashboard, Package, PackageCheck, Truck,
+  ArrowLeftRight, ClipboardList, History, Settings,
+  User, Menu, X, Boxes, LogOut,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -32,14 +23,26 @@ const navItems = [
 ];
 
 export default function Sidebar() {
-  const pathname = usePathname();
+  const pathname    = usePathname();
+  const router      = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  const handleLogout = () => {
+    localStorage.removeItem("ss_user");
+    router.push("/login");
+  };
+
+  // Get user name from localStorage for display
+  const userName = (() => {
+    if (typeof window === "undefined") return "";
+    try { return JSON.parse(localStorage.getItem("ss_user") ?? "{}").name ?? ""; }
+    catch { return ""; }
+  })();
+
   const NavList = () => (
-    <nav className="flex flex-col gap-1 px-3 py-4">
+    <nav className="flex flex-col gap-1 px-3 py-4 flex-1">
       {navItems.map(({ label, href, icon: Icon }) => {
-        const isActive =
-          href === "/" ? pathname === "/" : pathname.startsWith(href);
+        const isActive = href === "/" ? pathname === "/" : pathname.startsWith(href);
         return (
           <Link
             key={href}
@@ -58,6 +61,20 @@ export default function Sidebar() {
           </Link>
         );
       })}
+
+      {/* Logout button at bottom */}
+      <div className="mt-auto pt-4 border-t border-slate-700 mx-0">
+        {userName && (
+          <p className="px-3 py-1 text-xs text-slate-500 truncate">{userName}</p>
+        )}
+        <button
+          onClick={handleLogout}
+          className="w-full flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"
+        >
+          <LogOut className="h-4 w-4 shrink-0" />
+          Logout
+        </button>
+      </div>
     </nav>
   );
 
