@@ -28,19 +28,19 @@ Build a single-tenant inventory management frontend using Next.js 14 (App Router
     - Create the `src/__tests__/` directory
     - _Requirements: testing baseline_
 
-- [ ] 2. Shared types and mock data
+- [x] 2. Shared types and mock data
   - [x] 2.1 Define shared TypeScript types in `src/lib/types.ts`
     - Define `LedgerEntryType`, `LedgerEntry`, `KpiMetric`, `Product`, `Supplier`, `Customer`, `Location`, `Warehouse`, `ChartSeries`, `ChartDataPoint`, `ActiveFilters`
     - _Requirements: data model_
 
-  - [-] 2.2 Create mock data files in `src/data/`
+  - [x] 2.2 Create mock data files in `src/data/`
     - Create `kpis.ts`, `chartData.ts`, `products.ts`, `suppliers.ts`, `customers.ts`, `locations.ts`, `warehouses.ts`
     - Each file exports a typed const array using interfaces from `src/lib/types.ts`
     - Populate each with at least 4–6 realistic sample rows
     - _Requirements: mock data layer_
 
-- [ ] 3. Pure utility functions and Zod schemas
-  - [-] 3.1 Implement pure utility functions in `src/lib/utils.ts`
+- [x] 3. Pure utility functions and Zod schemas
+  - [x] 3.1 Implement pure utility functions in `src/lib/utils.ts`
     - Implement `computeVariance(newQty, currentQty): number`
     - Implement `nextDeliveryStep(current: DeliveryStep): DeliveryStep | "done"` with the `pick → pack → validate → done` transition map
     - Implement `applyFilters<T>(data, filters): T[]` with warehouse, category, and date-range predicates
@@ -48,7 +48,7 @@ Build a single-tenant inventory management frontend using Next.js 14 (App Router
     - Add UUID fallback: `generateId(): string` using `crypto.randomUUID()` with `Date.now() + Math.random()` fallback
     - _Requirements: R.1, DL.1–DL.3, A.1–A.2, D.2_
 
-  - [~] 3.2 Create Zod schemas in `src/lib/schemas/`
+  - [ ] 3.2 Create Zod schemas in `src/lib/schemas/`
     - `receipt.schema.ts` — `ReceiptSchema` with supplierId, warehouseId, sku (alphanumeric 1–50), productName, quantity (positive int), unitCost (nonneg), optional referenceNote
     - `delivery.schema.ts` — `DeliverySchema` with customerId, warehouseId, sku, quantity, optional deliveryRef
     - `transfer.schema.ts` — `TransferSchema` with sourceLocationId, destLocationId, sku, quantity, optional note; `.superRefine` rejecting same source/dest
