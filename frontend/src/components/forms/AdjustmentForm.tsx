@@ -88,12 +88,11 @@ export default function AdjustmentForm({ onSubmit }: AdjustmentFormProps) {
       const variance = computeVariance(data.physicalQty, data.systemQty);
 
       const created = await createAdjustment({
-        productId: data.productId,
-        locationId: data.locationId,
-        sku: data.sku,
-        physicalQty: data.physicalQty,
-        systemQty: data.systemQty,
-        variance,
+        product_id:  data.productId,
+        location_id: data.locationId,
+        target_qty:  data.physicalQty,
+        reason:      `Physical count adjustment. System qty: ${data.systemQty}`,
+        created_by:  "user",
       });
 
       await validateOperation("adjustments", created.id);
