@@ -201,17 +201,25 @@ export const fetchHistory = async (): Promise<ApiHistoryEntry[]> => {
 
 // ─── Create operations ────────────────────────────────────────────────────────
 
-export const createReceipt = (body: unknown): Promise<ApiOperation> =>
-  request<ApiOperation>("/api/receipts",    { method: "POST", body: JSON.stringify(body) });
+export const createReceipt = async (body: unknown): Promise<ApiOperation> => {
+  const data = await request<{ success: boolean; receipt: ApiOperation }>("/api/receipts", { method: "POST", body: JSON.stringify(body) });
+  return data.receipt;
+};
 
-export const createDelivery = (body: unknown): Promise<ApiOperation> =>
-  request<ApiOperation>("/api/deliveries",  { method: "POST", body: JSON.stringify(body) });
+export const createDelivery = async (body: unknown): Promise<ApiOperation> => {
+  const data = await request<{ success: boolean; delivery: ApiOperation }>("/api/deliveries", { method: "POST", body: JSON.stringify(body) });
+  return data.delivery;
+};
 
-export const createTransfer = (body: unknown): Promise<ApiOperation> =>
-  request<ApiOperation>("/api/transfers",   { method: "POST", body: JSON.stringify(body) });
+export const createTransfer = async (body: unknown): Promise<ApiOperation> => {
+  const data = await request<{ success: boolean; transfer: ApiOperation }>("/api/transfers", { method: "POST", body: JSON.stringify(body) });
+  return data.transfer;
+};
 
-export const createAdjustment = (body: unknown): Promise<ApiOperation> =>
-  request<ApiOperation>("/api/adjustments", { method: "POST", body: JSON.stringify(body) });
+export const createAdjustment = async (body: unknown): Promise<ApiOperation> => {
+  const data = await request<{ success: boolean; adjustment: ApiOperation }>("/api/adjustments", { method: "POST", body: JSON.stringify(body) });
+  return data.adjustment;
+};
 
 // ─── Validate (commit stock move) ─────────────────────────────────────────────
 
