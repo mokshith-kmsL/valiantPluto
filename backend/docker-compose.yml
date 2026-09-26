@@ -1,0 +1,58 @@
+version: '3.9'
+
+# ── StockSense — local dev stack ──────────────────────────────────────────────
+#
+#  Starts:
+#    • postgres  — the database (port 5432)
+#    • app       — the Node.js API server (port 3000)
+#
+#  Usage:
+#    docker-compose up          → start everything (builds app image if needed)
+#    docker-compose up -d       → start in background
+#    docker-compose down        → stop and remove containers
+#    docker-compose down -v     → also wipe the postgres data volume
+#
+#  First run:
+#    The app waits for postgres to be healthy, then runs migrations automatically.
+# ─────────────────────────────────────────────────────────────────────────────
+
+services:
+
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB:       stocksense
+      POSTGRES_USER:     stocksense
+      POSTGRES_PASSWORD: stocksense_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U stocksense -d stocksense"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://stocksense:stocksense_dev@postgres:5432/stocksense
+      NODE_ENV:     development
+      PORT:         3000
+    ports:
+      - "3000:3000"
+    volumes:
+      # Mount source for live reload in dev (nodemon watches for changes)
+      - .:/app
+      - /app/node_modules   # keep container's node_modules isolated
+
+volumes:
+  postgres_data:
