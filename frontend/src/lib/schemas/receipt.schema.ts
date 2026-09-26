@@ -3,6 +3,7 @@ import { z } from "zod";
 export const ReceiptSchema = z.object({
   supplierId: z.string().min(1, "Supplier is required"),
   productId: z.string().min(1, "Product is required"),
+  locationId: z.string().min(1, "Destination location is required"),
   sku: z
     .string()
     .regex(/^[a-zA-Z0-9_-]+$/, "SKU must be alphanumeric (hyphens and underscores allowed)")

@@ -9,9 +9,11 @@ import { ReceiptSchema, type ReceiptFormValues } from "@/lib/schemas/receipt.sch
 import { useFetch } from "@/hooks/useFetch";
 import {
   fetchProducts,
+  fetchLocations,
   createReceipt,
   validateOperation,
   type ApiProduct,
+  type ApiLocation,
 } from "@/lib/api";
 // Suppliers have no dedicated endpoint yet — fall back to static list
 import { suppliers } from "@/data/suppliers";
@@ -38,9 +40,11 @@ export default function ReceiptForm({ onSubmit }: ReceiptFormProps) {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
 
-  // Fetch products from the real API
+  // Fetch products and locations from the real API
   const { data: apiProducts, loading: productsLoading, error: productsError } =
     useFetch<ApiProduct[]>(fetchProducts);
+  const { data: apiLocations, loading: locationsLoading } =
+    useFetch<ApiLocation[]>(fetchLocations);
 
   const {
     register,
@@ -64,14 +68,19 @@ export default function ReceiptForm({ onSubmit }: ReceiptFormProps) {
     try {
       // 1. Create the draft operation
       const created = await createReceipt({
-        supplierId: data.supplierId,
-        productId: data.productId,
-        sku: data.sku,
-        quantity: data.quantity,
-        referenceNote: data.referenceNote,
+        destination_location_id: data.locationId,
+        supplier_id:             data.supplierId,
+        created_by:              "user",
       });
 
-      // 2. Validate (commit the stock move)
+      // 2. Add the product line
+      await fetch(`http://localhost:3000/api/receipts/${created.id}/lines`, {
+        method:  "POST",
+        headers: { "Content-Type": "application/json" },
+        body:    JSON.stringify({ product_id: data.productId, qty: data.quantity }),
+      });
+
+      // 3. Validate (commit the stock move)
       await validateOperation("receipts", created.id);
 
       // 3. Notify parent with a local ledger entry for the session log
@@ -142,8 +151,27 @@ export default function ReceiptForm({ onSubmit }: ReceiptFormProps) {
             )}
           </div>
 
-          {/* Product */}
+          {/* Destination Location */}
           <div className="flex flex-col gap-1.5">
+            <Label htmlFor="locationId">
+              Destination Warehouse <span className="text-red-500">*</span>
+            </Label>
+            <Select onValueChange={(val) => setValue("locationId", val, { shouldValidate: true })} disabled={locationsLoading}>
+              <SelectTrigger id="locationId" className={errors.locationId ? "border-red-500" : ""}>
+                <SelectValue placeholder={locationsLoading ? "Loading locations…" : "Select a warehouse…"} />
+              </SelectTrigger>
+              <SelectContent>
+                {(apiLocations ?? []).map((l) => (
+                  <SelectItem key={l.id} value={l.id}>{l.name}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            {errors.locationId && (
+              <p className="text-sm text-red-500">{errors.locationId.message}</p>
+            )}
+          </div>
+
+          {/* Product */}          <div className="flex flex-col gap-1.5">
             <Label htmlFor="productId">
               Product <span className="text-red-500">*</span>
             </Label>
