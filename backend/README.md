@@ -8,26 +8,30 @@ reads from or writes through this engine.
 
 ## Quick start
 
+**Prerequisites:** Node.js 20+ and PostgreSQL installed and running.
+
 ```bash
-# 1 — clone and enter the project
-cd stocksense
+# 1 — install Postgres if needed (Ubuntu/Debian)
+sudo apt install -y postgresql postgresql-contrib
+sudo systemctl start postgresql
+sudo -u postgres psql -c "CREATE USER stocksense WITH PASSWORD 'stocksense_dev';"
+sudo -u postgres psql -c "CREATE DATABASE stocksense OWNER stocksense;"
 
-# 2 — start Postgres + the API server (builds image on first run)
-docker-compose up
+# 2 — install dependencies and run migrations
+cd backend
+cp .env.example .env
+npm install
+npm run migrate
 
-# 3 — the API is live
-curl http://localhost:3000/healthz
+# 3 — start the server
+npm run dev
 ```
 
-That's it. Migrations run automatically on startup.
-
-**Running without Docker:**
+The API is live at `http://localhost:3000`.
 
 ```bash
-cp .env.example .env          # fill in DATABASE_URL
-npm install
-npm run migrate               # apply schema
-npm run dev                   # nodemon hot-reload
+curl http://localhost:3000/healthz
+# → { "status": "ok", "database": "connected" }
 ```
 
 ---
@@ -286,8 +290,6 @@ stocksense/
 │   │   └── ledger.js              # Express router
 │   └── server.js                  # app entry point
 ├── .env.example
-├── docker-compose.yml
-├── Dockerfile
 └── package.json
 ```
 
