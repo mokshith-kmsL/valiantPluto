@@ -1,0 +1,12 @@
+[eval]:1
+"import('fast-check').then(m
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Unterminated string constant
+
+SyntaxError: Invalid or unexpected token
+    at makeContextifyScript (node:internal/vm:194:14)
+    at compileScript (node:internal/process/execution:420:10)
+    at evalTypeScript (node:internal/process/execution:292:22)
+    at node:internal/main/eval_string:71:3
+
+Node.js v26.3.1

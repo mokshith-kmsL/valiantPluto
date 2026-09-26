@@ -69,42 +69,42 @@ Build a single-tenant inventory management frontend using Next.js 14 (App Router
     - File: `src/__tests__/delivery-state-machine.test.ts` and `src/__tests__/adjustment.test.ts`
     - **Validates: Requirements DL.1–DL.3, A.1–A.2**
 
-- [~] 4. Checkpoint — Ensure all schema and utility tests pass
+- [ ] 4. Checkpoint — Ensure all schema and utility tests pass
   - Run `npm test` and confirm zero failures before proceeding to UI components. Ask the user if questions arise.
 
 - [ ] 5. Layout and navigation
-  - [~] 5.1 Implement `src/components/layout/Sidebar.tsx`
+  - [ ] 5.1 Implement `src/components/layout/Sidebar.tsx`
     - Render persistent left nav rail with all nine nav items and their routes
     - Highlight active item with `bg-blue-600 text-white rounded-md`; inactive items `text-slate-300 hover:bg-slate-800`
     - Below 768 px: hide rail, show hamburger button that opens a slide-over drawer using shadcn/ui `Sheet`
     - Accept `currentPath: string` prop
     - _Requirements: layout, navigation_
 
-  - [~] 5.2 Wire Sidebar into `src/app/layout.tsx`
+  - [ ] 5.2 Wire Sidebar into `src/app/layout.tsx`
     - Root layout wraps children in a flex container: `<Sidebar>` + `<main>` slot
     - Pass `currentPath` from `usePathname()` to `Sidebar`
     - Apply global Tailwind base styles and dark slate background
     - _Requirements: layout_
 
 - [ ] 6. Dashboard components
-  - [~] 6.1 Implement `src/components/dashboard/KpiCard.tsx`
+  - [ ] 6.1 Implement `src/components/dashboard/KpiCard.tsx`
     - Render shadcn/ui `Card` with label, value, optional unit, optional trend badge
     - Trend badge: green arrow for `"up"`, red for `"down"`, slate for `"neutral"`
     - _Requirements: D.1_
 
-  - [~] 6.2 Implement `src/components/dashboard/FilterBar.tsx`
+  - [ ] 6.2 Implement `src/components/dashboard/FilterBar.tsx`
     - Three shadcn/ui `Select` dropdowns: Warehouse, Category, Date Range
     - Accept `warehouses`, `categories`, `dateRanges` arrays and `onChange` callback
     - Emit `ActiveFilters` on every selection change
     - _Requirements: D.2_
 
-  - [~] 6.3 Implement `src/components/dashboard/StockChart.tsx`
+  - [ ] 6.3 Implement `src/components/dashboard/StockChart.tsx`
     - Wrap Recharts `ResponsiveContainer` + `ComposedChart`
     - Support `"line"` and `"bar"` series types driven by `ChartSeries[]` prop
     - Render "No data yet" empty-state card when data array is empty
     - _Requirements: D.3_
 
-  - [~] 6.4 Implement the Dashboard page at `src/app/page.tsx`
+  - [ ] 6.4 Implement the Dashboard page at `src/app/page.tsx`
     - Hold `LedgerEntry[]` state with `useState`
     - Hold `ActiveFilters` state; pass `onChange` to `FilterBar`
     - Apply `applyFilters` and `buildChartData` to derive display data
@@ -117,14 +117,14 @@ Build a single-tenant inventory management frontend using Next.js 14 (App Router
     - **Validates: Requirements D.2**
 
 - [ ] 7. Transaction forms
-  - [~] 7.1 Implement `src/components/forms/ReceiptForm.tsx`
+  - [ ] 7.1 Implement `src/components/forms/ReceiptForm.tsx`
     - Use `useForm` with `zodResolver(ReceiptSchema)`
     - Dropdowns for supplier (from `src/data/suppliers.ts`) and warehouse (from `src/data/warehouses.ts`)
     - On valid submit: call `onSubmit(entry: LedgerEntry)` prop with `type: "receipt"` entry, then `reset()`
     - Inline field errors with `border-red-500` and `text-sm text-red-500 mt-1`
     - _Requirements: R.1, R.2, R.3, R.4_
 
-  - [~] 7.2 Implement `src/components/forms/DeliveryForm.tsx` with 3-step state machine
+  - [ ] 7.2 Implement `src/components/forms/DeliveryForm.tsx` with 3-step state machine
     - Local `useState<"pick" | "pack" | "validate">` initialized to `"pick"`
     - Step 1 (Pick): customer, warehouse, product, qty fields — "Confirm Pick" advances via `nextDeliveryStep`
     - Step 2 (Pack): read-only review of line items — "Confirm Pack" advances state
@@ -132,14 +132,14 @@ Build a single-tenant inventory management frontend using Next.js 14 (App Router
     - Only step 3 completion mutates the ledger
     - _Requirements: DL.1, DL.2, DL.3, DL.4_
 
-  - [~] 7.3 Implement `src/components/forms/TransferForm.tsx`
+  - [ ] 7.3 Implement `src/components/forms/TransferForm.tsx`
     - Use `useForm` with `zodResolver(TransferSchema)`
     - Two location dropdowns from `src/data/locations.ts`
     - `superRefine` same-location error surfaces on `destLocationId` field
     - On valid submit: call `onSubmit` with `type: "transfer"` entry, then `reset()`
     - _Requirements: T.1, T.2, T.3_
 
-  - [~] 7.4 Implement `src/components/forms/AdjustmentForm.tsx`
+  - [ ] 7.4 Implement `src/components/forms/AdjustmentForm.tsx`
     - Use `useForm` with `zodResolver(AdjustmentSchema)`
     - On valid submit: compute `variance = computeVariance(newQty, currentQty)`, call `onSubmit` with `type: "adjustment"` entry including `variance`, then `reset()`
     - _Requirements: A.1, A.2, A.3_
@@ -150,19 +150,19 @@ Build a single-tenant inventory management frontend using Next.js 14 (App Router
     - **Validates: Requirements R.1, DL.4, T.3, A.3**
 
 - [ ] 8. App Router pages
-  - [~] 8.1 Create transaction pages wiring forms to ledger state
+  - [ ] 8.1 Create transaction pages wiring forms to ledger state
     - `src/app/receipts/page.tsx` — holds `LedgerEntry[]` state, renders `<ReceiptForm onSubmit={...} />`
     - `src/app/deliveries/page.tsx` — holds state, renders `<DeliveryForm onSubmit={...} />`
     - `src/app/transfers/page.tsx` — holds state, renders `<TransferForm onSubmit={...} />`
     - `src/app/adjustments/page.tsx` — holds state, renders `<AdjustmentForm onSubmit={...} />`
     - _Requirements: R.1, DL.4, T.3, A.3_
 
-  - [~] 8.2 Create stub pages with `<ComingSoon />` placeholder
+  - [ ] 8.2 Create stub pages with `<ComingSoon />` placeholder
     - Implement `src/components/ComingSoon.tsx` — simple card with "Coming Soon" heading and subtext
     - Create `src/app/history/page.tsx`, `src/app/products/page.tsx`, `src/app/settings/page.tsx`, `src/app/profile/page.tsx` — each renders `<ComingSoon />`
     - _Requirements: navigation completeness_
 
-- [~] 9. Final checkpoint — Ensure all tests pass
+- [ ] 9. Final checkpoint — Ensure all tests pass
   - Run `npm test` (maps to `vitest run`). Confirm all property tests and unit tests pass with zero failures. Ask the user if questions arise.
 
 ---
