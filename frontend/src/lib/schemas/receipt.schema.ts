@@ -5,7 +5,7 @@ export const ReceiptSchema = z.object({
   productId: z.string().min(1, "Product is required"),
   sku: z
     .string()
-    .regex(/^[a-zA-Z0-9]+$/, "SKU must be alphanumeric")
+    .regex(/^[a-zA-Z0-9_-]+$/, "SKU must be alphanumeric (hyphens and underscores allowed)")
     .min(1, "SKU is required")
     .max(50, "SKU must not exceed 50 characters"),
   quantity: z

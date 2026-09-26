@@ -5,7 +5,7 @@ export const AdjustmentSchema = z.object({
   locationId: z.string().min(1, "Location is required"),
   sku: z
     .string()
-    .regex(/^[a-zA-Z0-9]+$/, "SKU must be alphanumeric")
+    .regex(/^[a-zA-Z0-9_-]+$/, "SKU must be alphanumeric (hyphens and underscores allowed)")
     .min(1, "SKU is required")
     .max(50),
   physicalQty: z
