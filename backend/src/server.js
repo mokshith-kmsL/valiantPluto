@@ -13,6 +13,10 @@ const productsRouter    = require('./routes/products');
 const locationsRouter   = require('./routes/locations');
 const historyRouter     = require('./routes/history');
 const dashboardRouter   = require('./routes/dashboard');
+const receiptsRouter    = require('./routes/receipts');
+const deliveriesRouter  = require('./routes/deliveries');
+const transfersRouter   = require('./routes/transfers');
+const adjustmentsRouter = require('./routes/adjustments');
 
 const app  = express();
 const PORT = process.env.PORT || 3000;
@@ -41,11 +45,15 @@ app.get('/healthz', async (_req, res) => {
 
 // ── Routes ────────────────────────────────────────────────────────────────────
 
-app.use('/api/ledger',    ledgerRouter);
-app.use('/api/products',  productsRouter);
-app.use('/api/locations', locationsRouter);
-app.use('/api/history',   historyRouter);
-app.use('/api/dashboard', dashboardRouter);
+app.use('/api/ledger',      ledgerRouter);
+app.use('/api/products',   productsRouter);
+app.use('/api/locations',  locationsRouter);
+app.use('/api/history',    historyRouter);
+app.use('/api/dashboard',  dashboardRouter);
+app.use('/api/receipts',   receiptsRouter);
+app.use('/api/deliveries', deliveriesRouter);
+app.use('/api/transfers',  transfersRouter);
+app.use('/api/adjustments',adjustmentsRouter);
 
 // ── Low-stock event bridge ────────────────────────────────────────────────────
 
